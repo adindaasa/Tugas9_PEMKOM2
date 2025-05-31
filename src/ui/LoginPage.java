@@ -6,6 +6,7 @@ package ui;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javax.swing.JOptionPane;
 import object.FontSetting;
 
 /**
@@ -24,7 +25,7 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void applyFont() {
         try {
-            FontSetting fs = new FontSetting("Code2000", 1, 14);
+            FontSetting fs = new FontSetting("Malgun Gothic", 1, 14);
             fs.selectContainer(getContentPane());
         } catch (Exception e) {
             System.err.println("" + e.getMessage());
@@ -110,6 +111,11 @@ public class LoginPage extends javax.swing.JFrame {
 
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLogin.setText("Login Now");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         lblForgot.setText("Forgot Password?");
 
@@ -196,6 +202,20 @@ public class LoginPage extends javax.swing.JFrame {
     private void cmbChooseLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbChooseLanguageActionPerformed
         applyLanguage();
     }//GEN-LAST:event_cmbChooseLanguageActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // Ambil username dari field input
+        String username = txtUsername.getText().trim(); // Misalkan txtUsername adalah JTextField untuk username
+        // Cek apakah username telah diisi
+        if (username.isEmpty()) {
+            // Tampilkan pesan peringatan jika username kosong
+            JOptionPane.showMessageDialog(this, "Username harus diisi!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Jika username diisi, buka HomePage
+            new HomePage().setVisible(true);
+            dispose(); // Menutup LoginPage jika diinginkan
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
